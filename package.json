@@ -2,19 +2,50 @@
   "name": "bip39-for-cardano",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json --fix",
+    "prettier": "prettier --write \"src/**/*.ts\"",
+    "test": "jest --config jestconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm t && npm run lint"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NoCtrlZ/bip39-for-cardano.git"
   },
+  "files": [
+    "lib"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/NoCtrlZ/bip39-for-cardano/issues"
   },
-  "homepage": "https://github.com/NoCtrlZ/bip39-for-cardano#readme"
+  "homepage": "https://github.com/NoCtrlZ/bip39-for-cardano#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "prettier src --write",
+      "eslint --fix src --ext .ts"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "husky": "^4.3.6",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
+  }
 }
