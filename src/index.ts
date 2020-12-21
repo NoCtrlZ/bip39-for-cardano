@@ -6,10 +6,10 @@ const WORDLIST_REQUIRED =
   'A wordlist is required but a default could not be found.\n' +
   'Please explicitly pass a 2048 word array explicitly.';
 
-export function entropyToMnemonic(
+export const entropyToMnemonic = (
   entropy: Buffer | string,
   wordlist?: string[]
-): string {
+): string => {
   if (!Buffer.isBuffer(entropy)) {
     entropy = Buffer.from(entropy, 'hex');
   }
@@ -40,7 +40,7 @@ export function entropyToMnemonic(
   });
 
   return words.join(' ');
-}
+};
 
 function deriveChecksumBits(entropyBuffer: Buffer): string {
   const ENT = entropyBuffer.length * 8;
